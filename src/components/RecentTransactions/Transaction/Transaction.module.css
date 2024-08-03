@@ -1,0 +1,57 @@
+.transaction {
+    display: grid;
+    grid-template-columns: 1fr 7fr 1fr 2fr;
+    align-items: center;
+    margin: 1em 1em 0 1em;
+    padding: 1em;
+}
+
+.transaction >* {
+    justify-self: center;
+    width: 100%;
+}
+
+.title {
+    color: #000000;
+    justify-self: left;
+    font-size: 1.5em;
+}
+
+.date {
+    color: grey;
+    justify-self: left;
+    font-size: 1em;
+}
+
+.price {
+    color: #F4BB4A;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+}
+
+.editIcon {
+    color: #F4BB4A;
+    box-shadow: 0 0 5px rgb(158, 158, 158);
+}
+
+.deleteIcon {
+    color: red;
+    box-shadow: 0 0 5px grey;
+}
+.icon {
+    border: none;
+    background-color: transparent;
+    font-size: 2.5em;
+    border-radius: .4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .2em;
+}

@@ -1,0 +1,32 @@
+.recentTransactions {
+    height: 40vh;
+    border-radius: .5em;
+}
+
+.title {
+    color: white;
+}
+
+.empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: rgb(93, 93, 93);
+}
+
+.hr {
+    width: 95%;
+    margin: auto;
+}
+.outer {
+    padding: .5em;
+    border-radius: 1em;
+    background-color: white;
+    height: 100%;
+    box-shadow: 0 0 5px rgb(40, 40, 40);
+}
+.history {
+    height: 100%;
+    overflow: auto;
+}
