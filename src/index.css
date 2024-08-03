@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .99em;
+}
+
+body {
+  background-color: #3B3B3B;
+  max-width: 90vw;
+  margin: auto;
+  height: 100%;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button {
+  font-weight: bold;
+}
