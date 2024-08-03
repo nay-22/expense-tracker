@@ -1,0 +1,75 @@
+.expenseSummary {
+    background-color: #626262;
+    margin: 0 1em 1em;
+    height: 40vh;
+    border-radius: 1em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    gap: .5em;
+    padding: 1em;
+    box-shadow: 0 1px 8px rgb(40, 40, 40);
+}
+
+.section {
+    background-color: #9B9B9B;
+    width: 80%;
+    height: 80%;
+    border-radius: 1em;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 1px 8px rgb(56, 56, 56);
+}
+
+.sectionWoS {
+    /* background-color: #9B9B9B; */
+    width: 80%;
+    height: 100%;
+    border-radius: 1em;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.sectionMain {
+    font-size: 2em;
+}
+
+.balance {
+    color: #9DFF5B;
+    font-weight: bold;
+} 
+
+.expense {
+    color: #F4BB4A;
+    font-weight: bold;
+}
+
+.sectionButtonWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sectionButtonWrapper button {
+    font-size: 1.25em;
+    border-radius: 1em;
+    padding: .5em 1em;
+    border: none;
+    font-weight: bold;
+}
+
+.addIncome {
+    background: linear-gradient(90deg, #B5DC52 0%, #89E148 100%);
+    color: white;
+}
+
+.addExpense {
+    background: linear-gradient(90deg, #FF9595 0%, #FF4747 80%, #FF3838 100%);
+    color: white;
+}
