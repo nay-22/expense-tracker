@@ -10,6 +10,10 @@
     box-shadow: 0 1px 8px rgb(40, 40, 40);
 }
 
+.modal {
+    background-color: black;
+}
+
 .pieWrapper {
     display: flex;
     align-items: center;

@@ -10,6 +10,7 @@ import { GoHistory } from "react-icons/go";
 
 import Pie from "../Chart/Pie/CustomPie";
 import useWindowSize from "../hooks/useWindowSize";
+import ReactModal from "react-modal";
 
 const ExpenseSummary = () => {
     const windowSize = useWindowSize();
@@ -33,7 +34,12 @@ const ExpenseSummary = () => {
                                 + Add Income
                             </button>
                         </div>
-                        {addBalance && createPortal(<AddBalance handleClose={() => setAddBalance(false)} />, document.body)}
+                        <ReactModal
+                            isOpen={addBalance}
+                            className={styles.modal}
+                        >
+                            <AddBalance handleClose={() => setAddBalance(false)} />
+                        </ReactModal>
                     </div>
                 </section>
                 <section className={styles.section}>
@@ -47,7 +53,12 @@ const ExpenseSummary = () => {
                                 + Add Expense
                             </button>
                         </div>
-                        {addExpense && createPortal(<AddExpense handleClose={() => setAddExpense(false)} />, document.body)}
+                        <ReactModal
+                            isOpen={addExpense}
+                            className={styles.modal}
+                        >
+                            <AddExpense handleClose={() => setAddExpense(false)} />
+                        </ReactModal>
                     </div>
                 </section>
             </div>

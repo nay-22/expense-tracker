@@ -7,6 +7,7 @@ import TransactionContext from "../../Contexts/TransactionContext";
 import { createPortal } from "react-dom";
 import AddExpense from "../../Modal/AddExpense/AddExpense";
 import DeleteExpense from "../../Modal/DeleteExpense/DeleteExpense";
+import ReactModal from "react-modal";
 
 
 const Transaction = ({id, icon, category, title, date, price}) => {
@@ -37,7 +38,10 @@ const Transaction = ({id, icon, category, title, date, price}) => {
                 <button onClick={() => handleDelete()} className={`${styles.deleteIcon} ${styles.icon}`}><BiSolidXCircle /></button>
                 <button onClick={() => handleUpdate()} className={`${styles.editIcon} ${styles.icon}`}><BiEdit /></button>
             </div>
-            {updating && createPortal(
+            <ReactModal
+                isOpen={updating}
+                className={styles.modal}
+            >
                 <AddExpense 
                     handleClose={() => setUpdating(false)} 
                     category={category} 
@@ -46,17 +50,20 @@ const Transaction = ({id, icon, category, title, date, price}) => {
                     date={date} 
                     id={id} 
                     edit 
-                />, 
-            document.body)}
-            {deleting && createPortal(
+                />
+            </ReactModal>
+            <ReactModal
+                className={styles.modal}
+                isOpen={deleting}
+            >
                 <DeleteExpense 
                     handleClose={() => setDeleting(false)} 
                     category={category}
                     title={title}
                     price={price} 
                     id={id} 
-                />, 
-            document.body)}
+                />
+            </ReactModal>
         </div>
     </>
 }

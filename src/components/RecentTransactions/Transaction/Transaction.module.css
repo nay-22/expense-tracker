@@ -7,6 +7,10 @@
     padding: 1em;
 }
 
+.modal {
+    background-color: #00000045;
+}
+
 .details {
     justify-self: left;
     width: 65%;
