@@ -7,7 +7,7 @@ import categories from "../../../config/config";
 import styles from "./AddExpense.module.css";
 import CategoricalExpenseContext from "../../Contexts/CategoricalExpenseContext";
 
-const AddExpense = ({handleClose, edit=false, id, title, category, date, price}) => {
+const AddExpense = ({ handleClose, edit = false, id, title, category, date, price }) => {
     const { enqueueSnackbar } = useSnackbar();
     const [type, setType] = useState({
         number: 'text', date: 'text'
@@ -15,9 +15,9 @@ const AddExpense = ({handleClose, edit=false, id, title, category, date, price})
 
     const [transactions, setTransactions] = useContext(TransactionContext);
     const [categoricalDetailsObject, expenseMapObject] = useContext(CategoricalExpenseContext);
-    
-    const {categoricalDetails, setCategoricalDetails} = categoricalDetailsObject;
-    const {expenseMap, setExpenseMap} = expenseMapObject;
+
+    const { categoricalDetails, setCategoricalDetails } = categoricalDetailsObject;
+    const { expenseMap, setExpenseMap } = expenseMapObject;
 
     const [expense, setExpense] = useState({
         id: id ? id : transactions.length,
@@ -31,27 +31,27 @@ const AddExpense = ({handleClose, edit=false, id, title, category, date, price})
 
 
     const captureExpense = (target) => {
-        if (target.id == "title") setExpense(prev => ({...prev, title: target.value}));
-        else if (target.id == "price") setExpense(prev => ({...prev, price: parseInt(target.value)}));
-        else if (target.id == "category") setExpense(prev => ({...prev, category: target.value}));
-        else if (target.id == "date") setExpense(prev => ({...prev, date: target.value}));
+        if (target.id == "title") setExpense(prev => ({ ...prev, title: target.value }));
+        else if (target.id == "price") setExpense(prev => ({ ...prev, price: parseInt(target.value) }));
+        else if (target.id == "category") setExpense(prev => ({ ...prev, category: target.value }));
+        else if (target.id == "date") setExpense(prev => ({ ...prev, date: target.value }));
     }
 
     const expenseIsValid = () => {
         if (expense.title == '') {
-            enqueueSnackbar('Please add a title to your expense', {variant: 'warning'});
+            enqueueSnackbar('Please add a title to your expense', { variant: 'warning' });
             return false;
         } else if (expense.price <= 0) {
-            enqueueSnackbar('Please ensure cost of the expense to be more than zero', {variant: 'warning'});
+            enqueueSnackbar('Please ensure cost of the expense to be more than zero', { variant: 'warning' });
             return false;
         } else if (expense.category == '') {
-            enqueueSnackbar('Please select a category for your expense', {variant: 'warning'});
+            enqueueSnackbar('Please select a category for your expense', { variant: 'warning' });
             return false;
         } else if (expense.date == '') {
-            enqueueSnackbar('Please select a date for your expense', {variant: 'warning'});
+            enqueueSnackbar('Please select a date for your expense', { variant: 'warning' });
             return false;
         } else if (!edit && expense.price > localStorage.getItem('balance')) {
-            enqueueSnackbar('You do not have enough balance in your wallet', {variant: 'warning'});
+            enqueueSnackbar('You do not have enough balance in your wallet', { variant: 'warning' });
             return false;
         }
         return true;
@@ -84,7 +84,7 @@ const AddExpense = ({handleClose, edit=false, id, title, category, date, price})
             updateBalance();
             updateCategoricalData();
             localStorage.setItem('transactions', JSON.stringify([expense, ...transactions]));
-            enqueueSnackbar(`Expense titled "${expense.title}" added successfully`, {variant: "success"});
+            enqueueSnackbar(`Expense titled "${expense.title}" added successfully`, { variant: "success" });
             handleClose();
         }
     }
@@ -116,7 +116,7 @@ const AddExpense = ({handleClose, edit=false, id, title, category, date, price})
                             let balance = parseInt(localStorage.getItem('balance'));
                             let transacted = parseInt(localStorage.getItem('expense'));
                             if (balance + item.price - expense.price < 0) {
-                                enqueueSnackbar('You do not have enough balance in your wallet', {variant: 'warning'});
+                                enqueueSnackbar('You do not have enough balance in your wallet', { variant: 'warning' });
                                 updated = false;
                                 return prev;
                             }
@@ -145,7 +145,7 @@ const AddExpense = ({handleClose, edit=false, id, title, category, date, price})
                 return prev;
             })
             if (updated) {
-                enqueueSnackbar(`Expense titled "${expense.title}" updated successfully`, {variant: "success"});
+                enqueueSnackbar(`Expense titled "${expense.title}" updated successfully`, { variant: "success" });
                 handleClose();
             }
         }
@@ -153,38 +153,36 @@ const AddExpense = ({handleClose, edit=false, id, title, category, date, price})
 
 
     return <>
-        <div className={styles.overlay}>
-            <div className={styles.modal}>
-                <h2>{edit ? "Edit" : "Add"} Expense</h2>
-                <br />
-                <div className={styles.control}>
-                    <input value={expense.title} id="title" onChange={(e) => captureExpense(e.target)} type="text" placeholder="Set Title"/>
-                    <input
-                        onFocus={() => setType(prev => ({...prev, number: 'number'}))} 
-                        onBlur={() => setType(prev => ({...prev, number: 'text'}))} 
-                        onChange={(e) => captureExpense(e.target)} 
-                        placeholder="Set Cost" 
-                        value={expense.price} 
-                        type={type.number} 
-                        id="price" 
-                        // min={1}
-                    />
-                    <select value={expense.category} id="category" onChange={(e) => captureExpense(e.target)} type="text" placeholder="Select Category">
-                        <option value="" disabled selected={!edit} hidden>Select Category</option>
-                        {categories.map(category => <option key={category.value} value={category.value}>{category.value.charAt(0).toUpperCase() + category.value.slice(1)}</option>)}
-                    </select>
-                    <input
-                        onFocus={() => setType(prev => ({...prev, date: 'date'}))} 
-                        onBlur={() => setType(prev => ({...prev, date: 'text'}))} 
-                        onChange={(e) => captureExpense(e.target)} 
-                        placeholder="Select Date"
-                        value={expense.date} 
-                        type={type.date} 
-                        id="date" 
-                    />
-                    <button className={styles.cancel} onClick={handleClose}>Cancel</button>
-                    <button className={styles.addExpense} onClick={edit ? updateExpense : addExpense}>{edit ? "Update" : "Add"} Expense</button>
-                </div>
+        <div className={styles.modal}>
+            <h2>{edit ? "Edit" : "Add"} Expense</h2>
+            <br />
+            <div className={styles.control}>
+                <input value={expense.title} id="title" onChange={(e) => captureExpense(e.target)} type="text" placeholder="Set Title" />
+                <input
+                    onFocus={() => setType(prev => ({ ...prev, number: 'number' }))}
+                    onBlur={() => setType(prev => ({ ...prev, number: 'text' }))}
+                    onChange={(e) => captureExpense(e.target)}
+                    placeholder="Set Cost"
+                    value={expense.price}
+                    type={type.number}
+                    id="price"
+                // min={1}
+                />
+                <select value={expense.category} id="category" onChange={(e) => captureExpense(e.target)} type="text" placeholder="Select Category">
+                    <option value="" disabled selected={!edit} hidden>Select Category</option>
+                    {categories.map(category => <option key={category.value} value={category.value}>{category.value.charAt(0).toUpperCase() + category.value.slice(1)}</option>)}
+                </select>
+                <input
+                    onFocus={() => setType(prev => ({ ...prev, date: 'date' }))}
+                    onBlur={() => setType(prev => ({ ...prev, date: 'text' }))}
+                    onChange={(e) => captureExpense(e.target)}
+                    placeholder="Select Date"
+                    value={expense.date}
+                    type={type.date}
+                    id="date"
+                />
+                <button className={styles.cancel} onClick={handleClose}>Cancel</button>
+                <button className={styles.addExpense} onClick={edit ? updateExpense : addExpense}>{edit ? "Update" : "Add"} Expense</button>
             </div>
         </div>
     </>
