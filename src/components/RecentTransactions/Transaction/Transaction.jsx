@@ -6,18 +6,18 @@ import { useContext, useState } from "react";
 import TransactionContext from "../../Contexts/TransactionContext";
 import { createPortal } from "react-dom";
 import AddExpense from "../../Modal/AddExpense/AddExpense";
+import DeleteExpense from "../../Modal/DeleteExpense/DeleteExpense";
 
 
 const Transaction = ({id, icon, category, title, date, price}) => {
-    const [transactions, setTransactions] = useContext(TransactionContext);
     const [updating, setUpdating] = useState(false);
     const [deleting, setDeleting] = useState(false);
     
-    const handleDelete = (id) => {
-
+    const handleDelete = () => {
+        setDeleting(true);
     }
 
-    const handleUpdate = (id) => {
+    const handleUpdate = () => {
         setUpdating(true);
     }
 
@@ -30,8 +30,8 @@ const Transaction = ({id, icon, category, title, date, price}) => {
             </div>
             <div className={styles.price}>₹{price}</div>
             <div className={styles.control}>
-                <button onClick={() => handleDelete(id)} className={`${styles.deleteIcon} ${styles.icon}`}><BiSolidXCircle /></button>
-                <button onClick={() => handleUpdate(id)} className={`${styles.editIcon} ${styles.icon}`}><BiEdit /></button>
+                <button onClick={() => handleDelete()} className={`${styles.deleteIcon} ${styles.icon}`}><BiSolidXCircle /></button>
+                <button onClick={() => handleUpdate()} className={`${styles.editIcon} ${styles.icon}`}><BiEdit /></button>
             </div>
             {updating && createPortal(
                 <AddExpense 
@@ -42,6 +42,15 @@ const Transaction = ({id, icon, category, title, date, price}) => {
                     date={date} 
                     id={id} 
                     edit 
+                />, 
+            document.body)}
+            {deleting && createPortal(
+                <DeleteExpense 
+                    handleClose={() => setDeleting(false)} 
+                    category={category}
+                    title={title}
+                    price={price} 
+                    id={id} 
                 />, 
             document.body)}
         </div>
