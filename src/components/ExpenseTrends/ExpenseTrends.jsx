@@ -9,9 +9,11 @@ const ExpenseTrends = () => {
     const [categoricalDetailsObject] = useContext(CategoricalExpenseContext);
     const { categoricalDetails } = categoricalDetailsObject;
 
+    console.log(categoricalDetails);
+
     return <>
         <div className={styles.trends}>
-            <h1>Expense Trends</h1>
+            <h1 className={styles.title}>Expense Trends</h1>
             <section className={styles.chart}>
                 {!categoricalDetails || categoricalDetails.length == 0 ?
                     <div className={styles.empty}>

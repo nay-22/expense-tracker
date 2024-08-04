@@ -23,7 +23,11 @@ const Transaction = ({id, icon, category, title, date, price}) => {
 
     return <>
         <div className={styles.transaction}>
-            <div className="type">{icon}</div>
+            <div className={styles.iconOuter}>
+                <div className={styles.type}>
+                    {icon}
+                </div>
+            </div>
             <div className={styles.details}>
                 <div className={styles.title}>{title}</div>
                 <div className={styles.date}>{date}</div>

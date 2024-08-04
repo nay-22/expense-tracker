@@ -1,14 +1,16 @@
 .transaction {
-    display: grid;
-    grid-template-columns: 1fr 7fr 1fr 2fr;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     align-items: center;
     margin: 1em 1em 0 1em;
     padding: 1em;
 }
 
-.transaction >* {
-    justify-self: center;
-    width: 100%;
+.details {
+    justify-self: left;
+    width: 65%;
+    padding-left: 1em;
 }
 
 .title {
@@ -27,13 +29,13 @@
     color: #F4BB4A;
     font-weight: bold;
     font-size: 1.5em;
+    padding-right: 1em;
 }
 
 .control {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80%;
 }
 
 .editIcon {
@@ -54,4 +56,46 @@
     align-items: center;
     justify-content: center;
     padding: .2em;
+    margin: 0 .2em;
+    width: fit-content;
+}
+
+.type {
+    width: fit-content;
+}
+
+@media(max-width: 900px) {
+    .title {
+        font-size: 1.2em;
+    }
+
+    .price {
+        font-size: 1.2em;
+    }
+
+    .date {
+        font-size: 1em;
+    }
+
+    .icon {
+        font-size: 1.8em;
+    }
+}
+
+@media(max-width: 492px) {
+    .title {
+        font-size: 1em;
+    }
+
+    .date {
+        font-size: .9em;
+    }
+
+    .price {
+        font-size: 1em;
+    }
+
+    .icon {
+        font-size: 1.5em;
+    }
 }

@@ -31,7 +31,7 @@
     border-radius: .5em;
     border: none;
     margin: 0 .5em;
-    box-shadow: 1px 5px 5px grey;
+    box-shadow: 0px 4px 5px grey;
 }
 
 .control {
@@ -50,7 +50,7 @@
     border: none;
     background-color: #F4BB4A;
     margin: 0 .5em;
-    box-shadow: 0px 5px 5px grey;
+    box-shadow: 0px 4px 5px grey;
 }
 
 .cancel {
@@ -61,5 +61,27 @@
     border-radius: .5em;
     border: none;
     margin: 0 .5em;
-    box-shadow: -1px 5px 5px grey;
+    box-shadow: 0px 4px 5px grey;
+}
+
+@media(max-width: 660px) {
+    .modal input, .modal select, .modal option {
+        font-size: .8em;
+    }
+
+    .addExpense, .cancel {
+        font-size: .8em;
+    }
+}
+
+@media(max-width: 492px) {
+
+    .modal {
+        width: 90%;
+    }
+
+    .control {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
 }

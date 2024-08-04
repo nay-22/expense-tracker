@@ -58,7 +58,7 @@ const DeleteExpense = ({handleClose, id, title, price, category}) => {
                 <h2>Delete Expense <span className={styles.name}>({title})</span></h2>
                 <br />
                 <div className={styles.control}>
-                    <button className={styles.deleteExpense} onClick={deleteExpense}>Delete Expense</button>
+                    <button className={styles.deleteExpense} onClick={deleteExpense}>Delete</button>
                     <button className={styles.cancel} onClick={handleClose}>Cancel</button>
                 </div>
             </div>

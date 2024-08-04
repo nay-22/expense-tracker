@@ -35,11 +35,11 @@ const CustomBar = () => {
             margin={{
                 top: 5,
                 right: 30,
-                left: 45,
+                left: 50,
                 bottom: 5,
               }}
         >
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid strokeDasharray="3 5" />
             <YAxis dataKey="name" type="category" />
             <XAxis type="number" />
             <Tooltip content={generateToolTip} shared={false} trigger="hover" />

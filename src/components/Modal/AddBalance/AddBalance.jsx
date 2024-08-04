@@ -14,10 +14,12 @@ const AddBalance = ({handleClose}) => {
             <div className={styles.modal}>
                 <h1>Add Balance</h1>
                 <br />
-                <div className="control">
+                <div className={styles.form}>
                     <input onChange={(e) => setAmount(e.target.value)} type="number" placeholder="Income Amount"/>
-                    <button className={styles.addIncome} onClick={updateBalance}>Add Balance</button>
-                    <button className={styles.cancel} onClick={handleClose}>Cancel</button>
+                    <div className={styles.control}>
+                        <button className={styles.cancel} onClick={handleClose}>Cancel</button>
+                        <button className={styles.addIncome} onClick={updateBalance}>Add Balance</button>
+                    </div>
                 </div>
             </div>
         </div>

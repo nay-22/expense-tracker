@@ -162,8 +162,8 @@ const AddExpense = ({handleClose, edit=false, id, title, category, date, price})
                         {categories.map(category => <option key={category.value} value={category.value}>{category.value.charAt(0).toUpperCase() + category.value.slice(1)}</option>)}
                     </select>
                     <input value={expense.date} id="date" onChange={(e) => captureExpense(e.target)} type="date"/>
-                    <button className={styles.addExpense} onClick={edit ? updateExpense : addExpense}>{edit ? "Update" : "Add"} Expense</button>
                     <button className={styles.cancel} onClick={handleClose}>Cancel</button>
+                    <button className={styles.addExpense} onClick={edit ? updateExpense : addExpense}>{edit ? "Update" : "Add"} Expense</button>
                 </div>
             </div>
         </div>

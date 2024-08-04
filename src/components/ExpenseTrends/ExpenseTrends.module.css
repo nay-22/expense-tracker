@@ -8,7 +8,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    color: white;
+    color: #5D5D5D;
 }
 
 .chart {
@@ -20,4 +20,39 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media(max-width: 1150px) {
+    .trends {
+        width: 100%;
+        padding: 1em;
+    }
+
+    .title {
+        font-size: 1.5em;
+    }
+}
+
+@media(max-width: 900px) {
+    .trends {
+        padding: 1em 0;
+    }
+
+    .title {
+        padding: 0 .5em;
+    }
+
+    .empty {
+        font-size: .8em;
+    }
+}
+
+@media(max-width: 492px) {
+    .title {
+        font-size: 1.2em;
+    }
+
+    .empty {
+        font-size: .6em;
+    }
 }

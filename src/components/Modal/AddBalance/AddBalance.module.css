@@ -28,7 +28,7 @@
     color: black;
 }
 
-.modal input {
+.form input {
     color: black;
     font-size: 1em;
     padding: 1em;
@@ -38,6 +38,18 @@
     box-shadow: 1px 5px 5px grey;
 }
 
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .addIncome {
     font-size: 1em;
     padding: 1em;
@@ -45,7 +57,7 @@
     border: none;
     background-color: #F4BB4A;
     margin: 0 .5em;
-    box-shadow: 0px 5px 5px grey;
+    box-shadow: -1px 5px 5px grey;
 }
 
 .cancel {
@@ -56,5 +68,33 @@
     border-radius: .5em;
     border: none;
     margin: 0 .5em;
-    box-shadow: -1px 5px 5px grey;
+    box-shadow: 0px 5px 5px grey;
 }
+
+@media(max-width: 1125px) {
+    .form {
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .form input {
+        box-shadow: 0px 1px 5px grey;
+    }
+}
+
+@media(max-width: 900px) {
+    .form input, .addIncome, .cancel {
+        font-size: .9em;
+    }
+
+    .modal h1 {
+        font-size: 1.5em;
+    }
+}
+
+@media(max-width: 600px) {
+    .form input, .addIncome, .cancel {
+        font-size: .72em;
+    }
+}
+

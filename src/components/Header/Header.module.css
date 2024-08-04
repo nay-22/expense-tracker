@@ -1,6 +1,5 @@
 .title {
     background-color: #3B3B3B;
-    padding: .5em .5em;
     color: white;
 }
 
@@ -8,6 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: .5em 1em;
 }
 
 .reset {
@@ -17,4 +17,14 @@
     font-size: 1em;
     background-color: #ad4af4;
     color: white;
+}
+
+@media(max-width: 492px) {
+    .title {
+        font-size: 1.2em;
+    }
+
+    .reset {
+        font-size: .8em;
+    }
 }

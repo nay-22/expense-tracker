@@ -30,3 +30,38 @@
     height: 100%;
     overflow: auto;
 }
+
+@media(max-width: 1150px) {
+    .recentTransactions {
+        width: 100%;
+        padding: 1em;
+    }
+    
+    .title {
+        font-size: 1.5em;
+    }
+}
+
+@media(max-width: 900px) {
+    .recentTransactions {
+        padding: 0;
+    }
+    
+    .title {
+        padding: 0 .5em;
+    }
+
+    .empty {
+        font-size: .8em;
+    }
+}
+
+@media(max-width: 492px) {
+    .title {
+        font-size: 1.2em;
+    }
+
+    .empty {
+        font-size: .6em;
+    }
+}
