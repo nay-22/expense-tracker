@@ -1,6 +1,6 @@
 .transactionsWrapper {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 2fr 1.5fr;
     align-items: center;
     gap: 2em;
     padding: 0 1em;

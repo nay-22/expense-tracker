@@ -2,6 +2,7 @@ import { AiOutlineCar } from "react-icons/ai";
 import { IoAmericanFootballOutline } from "react-icons/io5";
 import { MdFastfood } from "react-icons/md";
 import { BiSolidTShirt } from "react-icons/bi";
+import { PiCompassTool } from "react-icons/pi";
 
 import styles from "./config.module.css";
 
@@ -22,6 +23,10 @@ const categories = [
         value: 'entertainment',
         'icon': <IoAmericanFootballOutline className={styles.blackColor} />
     },
+    {
+        value: 'utility',
+        'icon': <PiCompassTool className={styles.blackColor} />
+    }
 ]
 
 export default categories;
