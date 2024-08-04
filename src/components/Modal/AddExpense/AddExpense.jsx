@@ -9,6 +9,9 @@ import CategoricalExpenseContext from "../../Contexts/CategoricalExpenseContext"
 
 const AddExpense = ({handleClose, edit=false, id, title, category, date, price}) => {
     const { enqueueSnackbar } = useSnackbar();
+    const [type, setType] = useState({
+        number: 'text', date: 'text'
+    });
 
     const [transactions, setTransactions] = useContext(TransactionContext);
     const [categoricalDetailsObject, expenseMapObject] = useContext(CategoricalExpenseContext);
@@ -38,7 +41,7 @@ const AddExpense = ({handleClose, edit=false, id, title, category, date, price})
         if (expense.title == '') {
             enqueueSnackbar('Please add a title to your expense', {variant: 'warning'});
             return false;
-        } else if (expense.price == 0) {
+        } else if (expense.price <= 0) {
             enqueueSnackbar('Please ensure cost of the expense to be more than zero', {variant: 'warning'});
             return false;
         } else if (expense.category == '') {
@@ -155,13 +158,30 @@ const AddExpense = ({handleClose, edit=false, id, title, category, date, price})
                 <h2>{edit ? "Edit" : "Add"} Expense</h2>
                 <br />
                 <div className={styles.control}>
-                    <input value={expense.title} id="title" onChange={(e) => captureExpense(e.target)} type="text" placeholder="Title"/>
-                    <input value={expense.price} id="price" onChange={(e) => captureExpense(e.target)} type="number" placeholder="Price" min={1}/>
+                    <input value={expense.title} id="title" onChange={(e) => captureExpense(e.target)} type="text" placeholder="Set Title"/>
+                    <input
+                        onFocus={() => setType(prev => ({...prev, number: 'number'}))} 
+                        onBlur={() => setType(prev => ({...prev, number: 'text'}))} 
+                        onChange={(e) => captureExpense(e.target)} 
+                        placeholder="Set Cost" 
+                        value={expense.price} 
+                        type={type.number} 
+                        id="price" 
+                        // min={1}
+                    />
                     <select value={expense.category} id="category" onChange={(e) => captureExpense(e.target)} type="text" placeholder="Select Category">
                         <option value="" disabled selected={!edit} hidden>Select Category</option>
                         {categories.map(category => <option key={category.value} value={category.value}>{category.value.charAt(0).toUpperCase() + category.value.slice(1)}</option>)}
                     </select>
-                    <input value={expense.date} id="date" onChange={(e) => captureExpense(e.target)} type="date"/>
+                    <input
+                        onFocus={() => setType(prev => ({...prev, date: 'date'}))} 
+                        onBlur={() => setType(prev => ({...prev, date: 'text'}))} 
+                        onChange={(e) => captureExpense(e.target)} 
+                        placeholder="Select Date"
+                        value={expense.date} 
+                        type={type.date} 
+                        id="date" 
+                    />
                     <button className={styles.cancel} onClick={handleClose}>Cancel</button>
                     <button className={styles.addExpense} onClick={edit ? updateExpense : addExpense}>{edit ? "Update" : "Add"} Expense</button>
                 </div>
