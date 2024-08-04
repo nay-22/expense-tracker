@@ -1,14 +1,30 @@
 .expenseSummary {
     background-color: #626262;
     margin: 0 1em 1em;
-    height: 38vh;
     border-radius: 1em;
     display: grid;
-    grid-template-columns: 1fr 1fr 1.5fr;
+    grid-template-columns: 2fr 1fr;
     align-items: center;
-    gap: .5em;
-    padding: 1em;
+    padding: 1em 4em;
+    gap: 1em;
     box-shadow: 0 1px 8px rgb(40, 40, 40);
+}
+
+.pieWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.transactionControl {
+    background-color: #626262;
+    border-radius: 1em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 1em;
 }
 
 .empty {
@@ -22,7 +38,6 @@
 .section {
     background-color: #9B9B9B;
     width: 80%;
-    height: 80%;
     border-radius: 1em;
     justify-self: center;
     display: flex;
@@ -30,6 +45,8 @@
     justify-content: center;
     color: white;
     box-shadow: 0 1px 8px rgb(56, 56, 56);
+    padding: 5em 2em;
+    margin: 3.5em 0;
 }
 
 .sectionWoS {
@@ -80,4 +97,120 @@
 .addExpense {
     background: linear-gradient(90deg, #FF9595 0%, #FF4747 80%, #FF3838 100%);
     color: white;
+}
+
+@media(max-width: 1660px) {
+    .expenseSummary {
+        padding: 1em 1em;
+    }
+
+    .sectionWoS {
+        width: 100%;
+    }
+
+    .sectionMain {
+        font-size: 1.5em;
+    }
+
+    .sectionButtonWrapper button {
+        font-size: 1em;
+    }
+
+    
+}
+
+@media(max-width: 1560px) {
+    .expenseSummary {
+        grid-template-columns: 2fr 1.2fr;
+    }
+
+    .sectionMain {
+        /* font-size: 1.5em; */
+    }
+}
+
+@media(max-width: 1375px) {
+    .expenseSummary {
+        /* display: flex;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; */
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        align-items: center;
+    }
+
+    .transactionControl {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 1em;
+    }
+
+    .section {
+        padding: 1em;
+        margin: 1em;
+        width: 100%;
+        height: 100%;
+    }
+
+    .pieWrapper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .sectionMain {
+        /* font-size: 1.5em; */
+    }
+}
+
+@media(max-width: 900px) {
+    .expenseSummary {
+        display: flex;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .transactionControl {
+        flex-direction: row;
+        margin: 0;
+    }
+
+    .pieWrapper {
+        height: 350px;
+        background-color: #626262;
+        box-shadow: 0 1px 8px rgb(40, 40, 40);
+        border-radius: 1em;
+
+    }
+
+    .empty {
+        font-size: .8em;
+    }
+}
+
+@media(max-width: 492px) {
+    .sectionMain {
+        font-size: 1em;
+    }
+
+    .sectionButtonWrapper button {
+        font-size: .7em;
+    }
+
+    .empty {
+        font-size: .6em;
+    }
 }

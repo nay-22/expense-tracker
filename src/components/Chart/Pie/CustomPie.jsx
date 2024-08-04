@@ -2,8 +2,11 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts"
 import generateKRandomColors from "../util";
 
 import styles from "./CustomPie.module.css";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const CustomPie = ({categoricalDetails}) => {
+
+    const windowSize = useWindowSize();
 
     const RADIAN = Math.PI / 180;
     const COLORS_INNER = generateKRandomColors(categoricalDetails.length);
@@ -29,7 +32,7 @@ const CustomPie = ({categoricalDetails}) => {
                 fill="black"
                 textAnchor={x > cx ? "start" : "end"}
                 dominantBaseline="central"
-                style={{ fontWeight: 'bold' }}
+                style={{ fontWeight: windowSize.width < 492 ? 'none' : 'none' }}
             >
                 {`${(percent * 100).toFixed(0)}%`}
             </text>
@@ -45,7 +48,7 @@ const CustomPie = ({categoricalDetails}) => {
         name,
         index,
     }) => {
-        const radius = innerRadius + (outerRadius - innerRadius) * 1.2;
+        const radius = innerRadius + (outerRadius - innerRadius) * 1.15;
         const x = cx + radius * Math.cos(-midAngle * RADIAN);
         const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
@@ -56,7 +59,7 @@ const CustomPie = ({categoricalDetails}) => {
                 fill="white"
                 textAnchor={x > cx ? "start" : "end"}
                 dominantBaseline="central"
-                style={{ fontWeight: 'bold' }}
+                style={{ fontWeight: windowSize.width < 492 ? 'none' : 'bold' }}
             >
                 {`${name.charAt(0).toUpperCase() + name.slice(1)}`}
             </text>
@@ -71,8 +74,8 @@ const CustomPie = ({categoricalDetails}) => {
                     dataKey="value"
                     cx='50%'
                     cy='50%'
-                    innerRadius={90}
-                    outerRadius={150}
+                    innerRadius={windowSize.width < 492 ? 75 : 90}
+                    outerRadius={windowSize.width < 492 ? 120 : 150}
                     fill="#82ca9d"
                     label={renderCustomizedOuterLabel}
                     labelLine={false}
@@ -86,8 +89,8 @@ const CustomPie = ({categoricalDetails}) => {
                     dataKey="value"
                     cx='50%'
                     cy='50%'
-                    innerRadius={30}
-                    outerRadius={80}
+                    innerRadius={windowSize.width < 492 ? 15 : 30}
+                    outerRadius={windowSize.width < 492 ? 60 : 80}
                     fill="#82ca9d"
                     label={renderCustomizedInnerLabel}
                     labelLine={false}
