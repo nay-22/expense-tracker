@@ -1,5 +1,20 @@
-.header {
+.title {
     background-color: #3B3B3B;
     padding: .5em .5em;
+    color: white;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.reset {
+    padding: .5em;
+    border: none;
+    border-radius: .25em;
+    font-size: 1em;
+    background-color: #ad4af4;
     color: white;
 }
