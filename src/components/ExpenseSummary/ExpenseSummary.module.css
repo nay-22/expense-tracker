@@ -1,10 +1,10 @@
 .expenseSummary {
     background-color: #626262;
     margin: 0 1em 1em;
-    height: 40vh;
+    height: 38vh;
     border-radius: 1em;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1.5fr;
     align-items: center;
     gap: .5em;
     padding: 1em;
@@ -16,7 +16,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    color: rgb(93, 93, 93);
+    color: white;
 }
 
 .section {

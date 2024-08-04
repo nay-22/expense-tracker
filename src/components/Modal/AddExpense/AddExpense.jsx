@@ -47,7 +47,7 @@ const AddExpense = ({handleClose, edit=false, id, title, category, date, price})
         } else if (expense.date == '') {
             enqueueSnackbar('Please select a date for your expense', {variant: 'warning'});
             return false;
-        } else if (expense.price > localStorage.getItem('balance')) {
+        } else if (!edit && expense.price > localStorage.getItem('balance')) {
             enqueueSnackbar('You do not have enough balance in your wallet', {variant: 'warning'});
             return false;
         }
@@ -81,21 +81,42 @@ const AddExpense = ({handleClose, edit=false, id, title, category, date, price})
             updateBalance();
             updateCategoricalData();
             localStorage.setItem('transactions', JSON.stringify([expense, ...transactions]));
+            enqueueSnackbar(`Expense titled "${expense.title}" added successfully`, {variant: "success"});
             handleClose();
         }
     }
 
     const updateExpense = () => {
+        let updated = true;
         if (expenseIsValid()) {
             setTransactions(prev => {
                 prev.map(item => {
                     if (item.id == id) {
-                        item.category = expense.category
                         item.title = expense.title;
                         item.date = expense.date;
+                        if (item.category == expense.category) {
+                            setExpenseMap(prev => {
+                                prev.set(item.category, prev.get(item.category) - item.price + expense.price);
+                                buildArrayFromMap(prev);
+                                return prev;
+                            });
+                        } else {
+                            setExpenseMap(prev => {
+                                prev.set(item.category, prev.get(item.category) - item.price);
+                                prev.set(expense.category, prev.get(expense.category) + item.price);
+                                buildArrayFromMap(prev);
+                                return prev;
+                            });
+                        }
+                        item.category = expense.category;
                         if (item.price != expense.price) {
                             let balance = parseInt(localStorage.getItem('balance'));
                             let transacted = parseInt(localStorage.getItem('expense'));
+                            if (balance + item.price - expense.price < 0) {
+                                enqueueSnackbar('You do not have enough balance in your wallet', {variant: 'warning'});
+                                updated = false;
+                                return prev;
+                            }
                             balance += item.price; // restore balance & expense state
                             transacted -= item.price; // restore balance & expense state
                             balance -= expense.price;
@@ -108,13 +129,22 @@ const AddExpense = ({handleClose, edit=false, id, title, category, date, price})
                                 return prev;
                             });
                             item.price = expense.price;
+                        } else {
+                            setExpenseMap(prev => {
+                                prev.set(item.category, prev.get(item.category) - item.price + expense.price);
+                                buildArrayFromMap(prev);
+                                return prev;
+                            });
                         }
                     }
                 })
                 localStorage.setItem('transactions', JSON.stringify(prev));
                 return prev;
             })
-            handleClose();
+            if (updated) {
+                enqueueSnackbar(`Expense titled "${expense.title}" updated successfully`, {variant: "success"});
+                handleClose();
+            }
         }
     }
 
@@ -122,7 +152,7 @@ const AddExpense = ({handleClose, edit=false, id, title, category, date, price})
     return <>
         <div className={styles.overlay}>
             <div className={styles.modal}>
-                <h1>{edit ? "Edit" : "Add"} Expense</h1>
+                <h2>{edit ? "Edit" : "Add"} Expense</h2>
                 <br />
                 <div className={styles.control}>
                     <input value={expense.title} id="title" onChange={(e) => captureExpense(e.target)} type="text" placeholder="Title"/>
