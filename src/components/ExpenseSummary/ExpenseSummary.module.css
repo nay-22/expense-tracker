@@ -11,6 +11,14 @@
     box-shadow: 0 1px 8px rgb(40, 40, 40);
 }
 
+.empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: rgb(93, 93, 93);
+}
+
 .section {
     background-color: #9B9B9B;
     width: 80%;

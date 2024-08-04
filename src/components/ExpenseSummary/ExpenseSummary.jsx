@@ -6,6 +6,7 @@ import AddExpense from "../Modal/AddExpense/AddExpense";
 import TransactionContext from "../Contexts/TransactionContext";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 import CategoricalExpenseContext from "../Contexts/CategoricalExpenseContext";
+import { GoHistory } from "react-icons/go";
 
 const ExpenseSummary = () => {
     const [addBalance, setAddBalance] = useState(false);
@@ -13,9 +14,9 @@ const ExpenseSummary = () => {
 
     const [transactions, setTransactions] = useContext(TransactionContext);
     const [categoricalDetailsObject, expenseMapObject] = useContext(CategoricalExpenseContext);
-    
-    const {categoricalDetails, setCatagoricalDetails} = categoricalDetailsObject;
-    const {expenseMap, setExpenseMap} = expenseMapObject;
+
+    const { categoricalDetails, setCatagoricalDetails } = categoricalDetailsObject;
+    const { expenseMap, setExpenseMap } = expenseMapObject;
 
     // const data = [
     //     { name: 'Food', value: 400 },
@@ -36,7 +37,8 @@ const ExpenseSummary = () => {
     }
 
     const RADIAN = Math.PI / 180;
-    const COLORS = generateKRandomColors(categoricalDetails.length);
+    const COLORS_INNER = generateKRandomColors(categoricalDetails.length);
+    const COLORS_OUTER = generateKRandomColors(categoricalDetails.length);
 
     const renderCustomizedInnerLabel = ({
         cx,
@@ -46,24 +48,24 @@ const ExpenseSummary = () => {
         outerRadius,
         percent,
         index,
-      }) => {
+    }) => {
         const radius = innerRadius + (outerRadius - innerRadius) * 0.2;
         const x = cx + radius * Math.cos(-midAngle * RADIAN);
         const y = cy + radius * Math.sin(-midAngle * RADIAN);
-      
+
         return (
-          <text
-            x={x}
-            y={y}
-            fill="black"
-            textAnchor={x > cx ? "start" : "end"}
-            dominantBaseline="central"
-            style={{fontWeight: 'bold'}}
-          >
-            {`${(percent * 100).toFixed(0)}%`}
-          </text>
+            <text
+                x={x}
+                y={y}
+                fill="black"
+                textAnchor={x > cx ? "start" : "end"}
+                dominantBaseline="central"
+                style={{ fontWeight: 'bold' }}
+            >
+                {`${(percent * 100).toFixed(0)}%`}
+            </text>
         );
-      };
+    };
     const renderCustomizedOuterLabel = ({
         cx,
         cy,
@@ -72,24 +74,24 @@ const ExpenseSummary = () => {
         outerRadius,
         name,
         index,
-      }) => {
-        const radius = innerRadius + (outerRadius - innerRadius) * 2.1;
+    }) => {
+        const radius = innerRadius + (outerRadius - innerRadius) * 1.2;
         const x = cx + radius * Math.cos(-midAngle * RADIAN);
         const y = cy + radius * Math.sin(-midAngle * RADIAN);
-      
+
         return (
-          <text
-            x={x}
-            y={y}
-            fill="white"
-            textAnchor={x > cx ? "start" : "end"}
-            dominantBaseline="central"
-            style={{fontWeight: 'bold'}}
-          >
-            {`${name.charAt(0).toUpperCase() + name.slice(1)}`}
-          </text>
+            <text
+                x={x}
+                y={y}
+                fill="white"
+                textAnchor={x > cx ? "start" : "end"}
+                dominantBaseline="central"
+                style={{ fontWeight: 'bold' }}
+            >
+                {`${name.charAt(0).toUpperCase() + name.slice(1)}`}
+            </text>
         );
-      };
+    };
 
     return <>
         <div className={styles.expenseSummary}>
@@ -121,40 +123,50 @@ const ExpenseSummary = () => {
                     {addExpense && createPortal(<AddExpense handleClose={() => setAddExpense(false)} />, document.body)}
                 </div>
             </section>
-            <section className={styles.sectionWoS}>
-                <ResponsiveContainer width="100%" height="100%">
-                    <PieChart width='100%' height='100%'>
-                        <Pie
-                            data={categoricalDetails}
-                            dataKey="value"
-                            cx='50%'
-                            cy='50%'
-                            innerRadius={90}
-                            outerRadius={120}
-                            fill="#82ca9d"
-                            label={renderCustomizedOuterLabel}
-                        >
-                            {categoricalDetails.map((entry, idx) => (
-                                <Cell key={idx} fill={COLORS[idx % COLORS.length]}/>
-                            ))}
-                        </Pie>
-                        <Pie
-                            data={categoricalDetails}
-                            dataKey="value"
-                            cx='50%'
-                            cy='50%'
-                            innerRadius={30}
-                            outerRadius={80}
-                            fill="#82ca9d"
-                            label={renderCustomizedInnerLabel}
-                        >
-                            {categoricalDetails.map((entry, idx) => (
-                                <Cell key={idx} fill={COLORS[idx % COLORS.length]}/>
-                            ))}
-                        </Pie>
-                    </PieChart>
-                </ResponsiveContainer>
-            </section>
+            {(!categoricalDetails || categoricalDetails.length == 0) ? <>
+                <section className={styles.section}>
+                    <div className={styles.empty}>
+                        <h2 ><GoHistory /> No expenses accounted yet...</h2>
+                    </div>
+                </section>
+            </> :
+                <section className={styles.sectionWoS}>
+                    <ResponsiveContainer width="100%" height="100%">
+                        <PieChart width='100%' height='100%'>
+                            <Pie
+                                data={categoricalDetails}
+                                dataKey="value"
+                                cx='50%'
+                                cy='50%'
+                                innerRadius={90}
+                                outerRadius={150}
+                                fill="#82ca9d"
+                                label={renderCustomizedOuterLabel}
+                                labelLine={false}
+                            >
+                                {categoricalDetails.map((entry, idx) => (
+                                    <Cell key={idx} fill={COLORS_OUTER[idx % COLORS_OUTER.length]} />
+                                ))}
+                            </Pie>
+                            <Pie
+                                data={categoricalDetails}
+                                dataKey="value"
+                                cx='50%'
+                                cy='50%'
+                                innerRadius={30}
+                                outerRadius={80}
+                                fill="#82ca9d"
+                                label={renderCustomizedInnerLabel}
+                                labelLine={false}
+                            >
+                                {categoricalDetails.map((entry, idx) => (
+                                    <Cell key={idx} fill={COLORS_INNER[idx % COLORS_INNER.length]} />
+                                ))}
+                            </Pie>
+                        </PieChart>
+                    </ResponsiveContainer>
+                </section>
+            }
         </div>
     </>
 }

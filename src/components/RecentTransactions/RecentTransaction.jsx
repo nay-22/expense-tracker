@@ -26,6 +26,7 @@ const RecentTransactions = () => {
                                 key={item.id}
                                 id={item.id}
                                 icon={categories.filter(c => c.value == item.category)[0].icon} 
+                                category={item.category}
                                 title={item.title}
                                 price={item.price}
                                 date={item.date}
