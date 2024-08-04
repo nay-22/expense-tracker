@@ -3,6 +3,41 @@
     border-radius: .5em;
 }
 
+.transactionsControl {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .5em;
+}
+
+.sortOptions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal {
+    background-color: black;
+}
+
+.sortBtn {
+    color: white;
+    font-size: 1.2em;
+    background-color: #d08f0f;
+    padding: .25em;
+    border: none;
+    border-radius: .2em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    font-weight: normal;
+}
+
+.sorted {
+    background-color: green;
+}
+
 .title {
     color: white;
 }
@@ -54,6 +89,10 @@
     .empty {
         font-size: .8em;
     }
+
+    .sortBtn {
+        font-size: 1em;
+    }
 }
 
 @media(max-width: 492px) {
@@ -63,5 +102,9 @@
 
     .empty {
         font-size: .6em;
+    }
+
+    .sortBtn {
+        font-size: .8em;
     }
 }

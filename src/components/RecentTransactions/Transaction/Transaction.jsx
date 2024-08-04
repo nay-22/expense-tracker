@@ -22,6 +22,13 @@ const Transaction = ({id, icon, category, title, date, price}) => {
         setUpdating(true);
     }
 
+    const getFormattedDate = (date) => {
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        let d = new Date(date)
+        const formattedDate = `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+        return formattedDate
+    }
+
     return <>
         <div className={styles.transaction}>
             <div className={styles.iconOuter}>
@@ -31,7 +38,7 @@ const Transaction = ({id, icon, category, title, date, price}) => {
             </div>
             <div className={styles.details}>
                 <div className={styles.title}>{title}</div>
-                <div className={styles.date}>{date}</div>
+                <div className={styles.date}>{getFormattedDate(date)}</div>
             </div>
             <div className={styles.price}>₹{price}</div>
             <div className={styles.control}>

@@ -27,9 +27,6 @@ const AddExpense = ({ handleClose, edit = false, id, title, category, date, pric
         date: date ? date : ''
     });
 
-    // console.log(expense);
-
-
     const captureExpense = (target) => {
         if (target.id == "title") setExpense(prev => ({ ...prev, title: target.value }));
         else if (target.id == "price") setExpense(prev => ({ ...prev, price: parseInt(target.value) }));
@@ -50,6 +47,15 @@ const AddExpense = ({ handleClose, edit = false, id, title, category, date, pric
         } else if (expense.date == '') {
             enqueueSnackbar('Please select a date for your expense', { variant: 'warning' });
             return false;
+        } else if (date != '') {
+            let today = new Date();
+            let expenseDate = new Date(expense.date);
+            let t1 = expenseDate.getTime();
+            let t2 = today.getTime();
+            if (t1 > t2) {
+                enqueueSnackbar('The date cannot be a future date', { variant: 'warning' });
+                return false;
+            }
         } else if (!edit && expense.price > localStorage.getItem('balance')) {
             enqueueSnackbar('You do not have enough balance in your wallet', { variant: 'warning' });
             return false;

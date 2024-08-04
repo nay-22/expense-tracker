@@ -11,15 +11,17 @@ import Header from './components/Header/Header'
 
 import styles from './App.module.css'
 import categories from './config/config'
+import { MaxPriorityQueue, PriorityQueue } from '@datastructures-js/priority-queue'
 
 function App() {
 
   const [expenseMap, setExpenseMap] = useState();
+
   if (!localStorage.getItem('balance')) localStorage.setItem('balance', 5000);
   if (!localStorage.getItem('expense')) localStorage.setItem('expense', 0);
+
   const [transactions, setTransactions] = useState(localStorage.getItem('transactions') != undefined ? JSON.parse(localStorage.getItem('transactions')) : []);
   const [categoricalDetails, setCategoricalDetails] = useState(localStorage.getItem('categorical') != undefined ? JSON.parse(localStorage.getItem('categorical')) : []);
-  // const [categoricalDetails, setCategoricalDetails] = useState();
 
   useEffect(() => {
     const createExpenseMap = () => {
@@ -33,7 +35,6 @@ function App() {
       console.log(map);
       setExpenseMap(map);
     }
-    
     createExpenseMap();
   }, []);
 

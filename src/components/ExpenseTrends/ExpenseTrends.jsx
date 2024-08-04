@@ -9,8 +9,6 @@ const ExpenseTrends = () => {
     const [categoricalDetailsObject] = useContext(CategoricalExpenseContext);
     const { categoricalDetails } = categoricalDetailsObject;
 
-    console.log(categoricalDetails);
-
     return <>
         <div className={styles.trends}>
             <h1 className={styles.title}>Expense Trends</h1>
