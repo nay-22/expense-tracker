@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "./FilterSort.module.css";
 
-import { FaSortAmountUp } from "react-icons/fa";
-import { FaSortAmountDownAlt } from "react-icons/fa";
 import categories from "../../../config/config";
 
-const FilterSort = ({ handleClose, setProcessed, transactions, meta, setMeta }) => {
+const FilterSort = ({ handleClose, setProcessed, transactions, meta, setMeta, performProcessing }) => {
 
     const [tempMeta, setTempMeta] = useState(meta);
 
@@ -59,37 +57,8 @@ const FilterSort = ({ handleClose, setProcessed, transactions, meta, setMeta }) 
     const handleConfirm = () => {
         setMeta(tempMeta);
         console.log(tempMeta);
-        performProcessing();
+        performProcessing(tempMeta);
         handleClose();
-    }
-
-    const performProcessing = () => {
-        setProcessed(() => {
-            let processed = [...transactions];
-            // SORT
-            if (tempMeta.sort.type === 'date') {
-                if (tempMeta.sort.order === 'low') {
-                    processed.sort((a,b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-                } else {
-                    processed.sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-                }
-            } else if (tempMeta.sort.type === 'price') {
-                if (tempMeta.sort.order === 'low') {
-                    processed.sort((a,b) => a.price - b.price);
-                } else {
-                    processed.sort((a, b) => b.price - a.price);
-                }
-            }
-
-            const filters = tempMeta.filter;
-            console.log(filters);
-            //FILTER
-            if (filters.length > 0) {
-                processed = processed.filter(item => filters.includes(item.category));
-            }
-            console.log(processed);
-            return processed;
-        });
     }
 
     return (
@@ -168,9 +137,9 @@ const FilterSort = ({ handleClose, setProcessed, transactions, meta, setMeta }) 
                 <br />
                 <h1>Filter</h1>
                 <hr />
-                <form className={styles.filterOptions} onSubmit={(e) => e.preventDefault()}>
+                <form className={styles.filterContainer} onSubmit={(e) => e.preventDefault()}>
                     <h3>Category</h3>
-                    <div>
+                    <div className={styles.filterOptions}>
                         {
                             categories.map(item => 
                                 <div>
@@ -192,7 +161,7 @@ const FilterSort = ({ handleClose, setProcessed, transactions, meta, setMeta }) 
                     <button className={styles.cancel} onClick={handleClose}>Cancel</button>
                 </div>
                 <div className={styles.control}>
-                    <button className={styles.cancel} onClick={handleConfirm}>Confirm</button>
+                    <button className={styles.confirm} onClick={handleConfirm}>Confirm</button>
                 </div>
             </div>
         </div>

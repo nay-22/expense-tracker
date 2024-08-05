@@ -34,8 +34,13 @@
     font-weight: normal;
 }
 
-.sorted {
-    background-color: green;
+.processedInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    color: #d08f0f;
+    font-size: .8em;
 }
 
 .title {
@@ -82,7 +87,7 @@
         padding: 0;
     }
     
-    .title {
+    .transactionsControl {
         padding: 0 .5em;
     }
 
@@ -92,6 +97,11 @@
 
     .sortBtn {
         font-size: 1em;
+    }
+
+    .processedInfo {
+        padding-left: .5em;
+        padding-right: .5em;
     }
 }
 

@@ -11,6 +11,10 @@
     color: #5D5D5D;
 }
 
+.title {
+    padding: 0 0 1em;
+}
+
 .chart {
     border-radius: 1em;
     background-color: white;
@@ -30,6 +34,8 @@
 
     .title {
         font-size: 1.5em;
+        padding: 0;
+        margin: 1em 0 0;
     }
 }
 
