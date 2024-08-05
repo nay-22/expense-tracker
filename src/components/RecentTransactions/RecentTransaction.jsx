@@ -16,10 +16,16 @@ import ReactModal from "react-modal";
 import FilterSort from "../Modal/FilterSort/FilterSort";
 
 const RecentTransactions = () => {
-    const [categoricalDetailsObject, expenseMapObject] = useContext(CategoricalExpenseContext);
     
     const [transactions, setTransactions] = useContext(TransactionContext);
     const [processed, setProcessed] = useState(transactions);
+    const [meta, setMeta] = useState({
+        sort: {
+            type: '',
+            order: ''
+        }, 
+        filter: []
+    })
     const [sortModal, setSortModal] = useState(false);
 
     const handleSort = () => {
@@ -42,7 +48,13 @@ const RecentTransactions = () => {
                         isOpen={sortModal}
                         className={styles.modal}
                     >
-                        <FilterSort handleClose={handleClose} setProcessed={setProcessed} transactions={transactions} />
+                        <FilterSort
+                            handleClose={handleClose} 
+                            setProcessed={setProcessed} 
+                            transactions={transactions} 
+                            meta={meta}
+                            setMeta={setMeta}
+                        />
                     </ReactModal>
                 </div>
             </div>
@@ -53,7 +65,7 @@ const RecentTransactions = () => {
                             <h2 ><GoHistory /> No expenses accounted yet...</h2>
                         </div>
                     </> }
-                    {transactions.map(item => 
+                    {processed.map(item => 
                         <>
                             <Transaction 
                                 key={item.id}
