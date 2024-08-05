@@ -9,9 +9,6 @@ import CategoricalExpenseContext from "../../Contexts/CategoricalExpenseContext"
 
 const AddExpense = ({ handleClose, edit = false, id, title, category, date, price }) => {
     const { enqueueSnackbar } = useSnackbar();
-    const [type, setType] = useState({
-        number: 'text', date: 'text'
-    });
 
     const [transactions, setTransactions] = useContext(TransactionContext);
     const [categoricalDetailsObject, expenseMapObject] = useContext(CategoricalExpenseContext);
@@ -165,26 +162,22 @@ const AddExpense = ({ handleClose, edit = false, id, title, category, date, pric
             <div className={styles.control}>
                 <input value={expense.title} id="title" onChange={(e) => captureExpense(e.target)} type="text" placeholder="Set Title" />
                 <input
-                    onFocus={() => setType(prev => ({ ...prev, number: 'number' }))}
-                    onBlur={() => setType(prev => ({ ...prev, number: 'text' }))}
                     onChange={(e) => captureExpense(e.target)}
                     placeholder="Set Cost"
                     value={expense.price}
-                    type={type.number}
+                    type='number'
                     id="price"
-                // min={1}
+                    min={1}
                 />
                 <select value={expense.category} id="category" onChange={(e) => captureExpense(e.target)} type="text" placeholder="Select Category">
                     <option value="" disabled selected={!edit} hidden>Select Category</option>
                     {categories.map(category => <option key={category.value} value={category.value}>{category.value.charAt(0).toUpperCase() + category.value.slice(1)}</option>)}
                 </select>
                 <input
-                    onFocus={() => setType(prev => ({ ...prev, date: 'date' }))}
-                    onBlur={() => setType(prev => ({ ...prev, date: 'text' }))}
                     onChange={(e) => captureExpense(e.target)}
                     placeholder="Select Date"
                     value={expense.date}
-                    type={type.date}
+                    type='date'
                     id="date"
                 />
                 <button className={styles.cancel} onClick={handleClose}>Cancel</button>

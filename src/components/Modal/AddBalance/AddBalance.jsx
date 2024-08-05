@@ -1,12 +1,15 @@
 import { useState } from "react";
 import styles from "./AddBalance.module.css";
+import { useSnackbar } from "notistack";
 
 const AddBalance = ({handleClose}) => {
     const [amount, setAmount] = useState();
+    const {enqueueSnackbar} = useSnackbar();
 
     const updateBalance = () => {
         const balance = parseInt(localStorage.getItem('balance'));
         localStorage.setItem('balance', balance + parseInt(amount));
+        enqueueSnackbar(`₹${amount} added to your balance`, {variant: 'success'});
         handleClose();
     }
     return <>
