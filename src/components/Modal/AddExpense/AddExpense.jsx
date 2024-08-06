@@ -35,16 +35,20 @@ const AddExpense = ({ handleClose, edit = false, id, title, category, date, pric
         if (expense.title == '') {
             enqueueSnackbar('Please add a title to your expense', { variant: 'warning' });
             return false;
-        } else if (expense.price <= 0) {
+        }
+         if (expense.price <= 0) {
             enqueueSnackbar('Please ensure cost of the expense to be more than zero', { variant: 'warning' });
             return false;
-        } else if (expense.category == '') {
+        }
+         if (expense.category == '') {
             enqueueSnackbar('Please select a category for your expense', { variant: 'warning' });
             return false;
-        } else if (expense.date == '') {
+        }
+         if (expense.date == '') {
             enqueueSnackbar('Please select a date for your expense', { variant: 'warning' });
             return false;
-        } else if (date != '') {
+        }
+         if (date != '') {
             let today = new Date();
             let expenseDate = new Date(expense.date);
             let t1 = expenseDate.getTime();
@@ -53,7 +57,8 @@ const AddExpense = ({ handleClose, edit = false, id, title, category, date, pric
                 enqueueSnackbar('The date cannot be a future date', { variant: 'warning' });
                 return false;
             }
-        } else if (!edit && expense.price > localStorage.getItem('balance')) {
+        }
+         if (!edit && expense.price > localStorage.getItem('balance')) {
             enqueueSnackbar('You do not have enough balance in your wallet', { variant: 'warning' });
             return false;
         }
