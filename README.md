@@ -1,5 +1,5 @@
 # Expense Tracker
-### Link: https://expense-tracker-nfjy6fjyf-nayans-projects-ca58165e.vercel.app/
+### Link: https://expense-tracker-7m5xnd6uz-nayans-projects-ca58165e.vercel.app/
 A responsive web application for tracking expenses, allowing users to add, edit, and delete expenses based on category and date, as well as view a summary of their expenses.
 
 ## Features
